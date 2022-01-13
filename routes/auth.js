@@ -1,6 +1,6 @@
 const express = require("express");
 const router = new express.Router();
-const User = require("../models/User")
+const UserModel = require("../models/User")
 module.exports = router;
 
 router.get("/signup", (req, res) => {
@@ -10,13 +10,13 @@ router.get("/signup", (req, res) => {
 router.post("/signup", async (req, res, next) => {
     try {
         const newUser = { ...req.body};
-        const foundUser = await User.findOne({ email : newUser.email });
+        const foundUser = await UserModel.findOne({ email : newUser.email });
         
         if (foundUser) {
             req.flash("warning", "Email already registered !");
             res.redirect("/auth/signup");
         } else {
-            await User.create(newUser);
+            await UserModel.create(newUser);
             req.flash("success", "Congrats ! You are now registered !");
             res.redirect("/auth/signin");
         }
@@ -32,7 +32,7 @@ router.get("/signin", (req, res) => {
 router.post("/signin", async (req, res, next) => {
     try {
         const { email, password } = req.body;
-        const foundUser = await User.findOne({email : email});
+        const foundUser = await UserModel.findOne({email : email});
 
         if (!foundUser) {
             req.flash("error", "Invalid email");
