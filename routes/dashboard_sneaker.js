@@ -41,4 +41,13 @@ router.get("/prod-manage", protectPrivateRoute, (req, res) => {
         .catch(err => console.error(err))
 })
 
+router.post("/delete/:id", protectPrivateRoute, (req, res) => {
+    SneakerModel
+        .findByIdAndDelete(req.params.id)
+        .then(() => {
+            res.redirect("/dashboard")
+        })
+        .catch(e => console.error(e))
+})
+
 module.exports = router;
