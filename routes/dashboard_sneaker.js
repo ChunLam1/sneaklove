@@ -3,17 +3,17 @@ const router = new express.Router(); // create an app sub-module (router)
 const SneakerModel = require("../models/Sneaker");
 const TagModel = require("../models/Tag");
 const uploader = require("./../config/cloudinary");
-module.exports = router;
+const protectPrivateRoute = require("../middlewares/protectPrivateRoute")
 
-router.get("/", (req, res) => {
+router.get("/", protectPrivateRoute, (req, res) => {
     res.render("products_manage");
 })
 
-router.get("/prod-add", (req, res) => {
+router.get("/prod-add", protectPrivateRoute, (req, res) => {
     res.render("products_add");
 })
 
-router.post("/prod-add", async (req, res, next) => {
+router.post("/prod-add", protectPrivateRoute, async (req, res, next) => {
     try {
         await SneakerModel.create(req.body);
         res.redirect("/dashboard");
@@ -22,6 +22,8 @@ router.post("/prod-add", async (req, res, next) => {
     }
 })
 
-router.get("/prod-manage", (req, res) => {
+router.get("/prod-manage", protectPrivateRoute, (req, res) => {
     res.render("products_manage");
 })
+
+module.exports = router;
