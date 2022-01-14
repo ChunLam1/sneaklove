@@ -27,10 +27,10 @@
           </li>
           {{#if isLoggedIn}}
           <li class="nav-item animated-link nav-item-admin">
-            <a href="/prod-add">Add product</a>
+            <a href="/dashboard/prod-add">Add product</a>
           </li>
            <li class="nav-item animated-link nav-item-admin">
-            <a href="/prod-manage">Manage products</a>
+            <a href="/dashboard/prod-manage">Manage products</a>
           </li>
           {{/if}}
         </ul>
@@ -38,6 +38,9 @@
       <div class="flexed-item nav-end">
         {{#unless isLoggedIn}}
         <a  href="/auth/signup" id="nav_login" class="button-ternary flexed-item nav-end-item">
+          <span class="btn-text">Sign up</span>
+        </a>
+        <a  href="/auth/signin" id="nav_login" class="button-ternary flexed-item nav-end-item">
           <span class="btn-text">Sign in</span>
         </a>
         {{/unless}}
