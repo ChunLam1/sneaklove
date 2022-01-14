@@ -6,11 +6,21 @@ const uploader = require("./../config/cloudinary");
 const protectPrivateRoute = require("../middlewares/protectPrivateRoute")
 
 router.get("/", protectPrivateRoute, (req, res) => {
-    res.render("products_manage");
+    SneakerModel
+        .find()
+        .then((sneakers => {
+            res.render("products_manage", { sneakers });
+        }))
+        .catch(err => console.error(err))
 })
 
 router.get("/prod-add", protectPrivateRoute, (req, res) => {
-    res.render("products_add");
+    TagModel
+        .find()
+        .then((tags => {
+            res.render("products_add", { tags });
+        }))
+        .catch(err => console.error(err))
 })
 
 router.post("/prod-add", protectPrivateRoute, async (req, res, next) => {
@@ -23,7 +33,12 @@ router.post("/prod-add", protectPrivateRoute, async (req, res, next) => {
 })
 
 router.get("/prod-manage", protectPrivateRoute, (req, res) => {
-    res.render("products_manage");
+    SneakerModel
+        .find()
+        .then((sneakers => {
+            res.render("products_manage", { sneakers });
+        }))
+        .catch(err => console.error(err))
 })
 
 module.exports = router;
