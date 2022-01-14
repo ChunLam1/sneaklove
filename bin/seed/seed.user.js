@@ -1,29 +1,29 @@
 require("dotenv").config();
-require("./../../config/mongo"); 
+require("../../config/mongodb");
 const UserModel = require("../../models/User");
 
-const users = [
-    {
-      name:"PIERRE",
-      lastname:"DUPONT",
-      email:"foo@aaaa.fr",
-      password:"ZAE123"
-    },
-    {
-      name:"JEANNE",
-      lastname:"DUC",
-      email:"fARR@aaaa.fr",
-      password:"123123aze"
-    }
-],
+const user = [
+  {
+    name: "PIERRE",
+    lastname: "DUPONT",
+    email: "foo@aaaa.fr",
+    password: "ZAE123",
+  },
+
+  {
+    name: "JEANNE",
+    lastname: "DUC",
+    email: "fARR@aaaa.fr",
+    password: "123123aze",
+  }
+];
 
 (async function insertUser() {
-    try {
-      await UserModel.deleteMany();
-      const inserted = await UserModel.insertMany(users);
-      console.log(`seed User done : ${inserted.length} documents inserted !`);
-    } catch (err) {
-      console.error(err);
-    }
-  })();
-  
+  try {
+    await UserModel.deleteMany();
+    const inserted = await UserModel.insertMany(user);
+    console.log(`seed User done : ${inserted.length} documents inserted !`);
+  } catch (err) {
+    console.error(err);
+  }
+})();
